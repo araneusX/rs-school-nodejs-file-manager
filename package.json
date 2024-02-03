@@ -1,0 +1,12 @@
+{
+  "name": "rs-school-nodejs-file-manager",
+  "version": "1.0.0",
+  "description": "File Manager",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Alex Oleshkevich",
+  "license": "MIT"
+}
