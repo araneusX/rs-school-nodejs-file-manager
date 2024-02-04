@@ -4,6 +4,7 @@ const colors = {
   currentDirectory: '\x1b[93m%s\x1b[0m',
   welcome: '\x1b[36m%s\x1b[0m',
   goodbye: '\x1b[36m%s\x1b[0m',
+  data: '\x1b[35m%s\x1b[0m',
 };
 
 const messages = {
@@ -13,6 +14,7 @@ const messages = {
     `Thank you for using File Manager${value && `, ${value}`}, goodbye!`,
   success: (value) => value,
   error: (value) => value,
+  data: (value) => value,
   currentDirectory: (value = '') => `You are currently in ${value}`,
 };
 
@@ -23,6 +25,7 @@ const messages = {
  * @property {(value?: string) => void} currentDirectory
  * @property {(value: string) => void} success
  * @property {(value: string) => void} error
+ * @property {(value: string) => void} data
  */
 
 /**

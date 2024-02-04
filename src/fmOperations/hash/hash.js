@@ -1,6 +1,5 @@
 /**
  * @typedef {Object} Report
- * @property {"error"|"success"} status
  * @property {string} [message]
  * @property {string} [payload]
  */

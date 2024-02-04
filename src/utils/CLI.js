@@ -29,6 +29,9 @@ export class CLI {
       if (this.interval !== null) {
         writeStream.moveCursor(0, -2);
         writeStream.clearScreenDown();
+      } else {
+        writeStream.moveCursor(0, -1);
+        writeStream.clearScreenDown();
       }
     });
   }
@@ -81,10 +84,10 @@ export class CLI {
   }
 
   /**
-   * @param {{[key: string]: string}[]} data - Readline Interface
+   * @param {{[key: string]: string}[] | string} data - Readline Interface
    * @return {void}
    */
-  printTable(data) {
+  printData(data) {
     const isPause = this.interval !== null;
     clearInterval(this.interval);
     this.interval = null;
@@ -93,7 +96,12 @@ export class CLI {
 
     this.rl.setPrompt('');
     this.rl.prompt();
-    console.table(data);
+    console.log('');
+    if (Array.isArray(data)) {
+      console.table(data);
+    } else {
+      printMessage.data(data);
+    }
     console.log('');
 
     if (isPause) {
@@ -115,8 +123,10 @@ export class CLI {
       this.rl.prompt();
     }
 
-    const successMessage = message ?? 'Successfully done';
-    printMessage.success(successMessage);
+    if (message) {
+      printMessage.success(message);
+    }
+
     this.showCTA();
   }
 
