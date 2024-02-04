@@ -2,12 +2,11 @@
  * @typedef {Object} Report
  * @property {"error"|"success"} status
  * @property {string} [message]
+ * @property {string} [payload]
  */
 
 /**
- * Delete file
- * @param {string} newFileName - File name.
+ * Get EOL (default system End-Of-Line) and print it to console.
  * @return {Promise<Report>} report
  */
-
-export const rm = async (newFileName) => {};
+export const eol = async () => {};

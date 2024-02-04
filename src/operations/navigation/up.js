@@ -1,7 +1,11 @@
 /**
- * Go upper from current directory (when you are in the root folder this operation shouldn't change working directory)
- * @return {Promise<string>} report
+ * @typedef {Object} Report
+ * @property {"error"|"success"} status
+ * @property {string} [message]
  */
-export const up = async () => {
 
-}
+/**
+ * Go upper from current directory (when you are in the root folder this operation shouldn't change working directory)
+ * @return {Promise<Report>} report
+ */
+export const up = async () => {};

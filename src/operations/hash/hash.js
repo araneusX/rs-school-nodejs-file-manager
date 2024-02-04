@@ -2,12 +2,12 @@
  * @typedef {Object} Report
  * @property {"error"|"success"} status
  * @property {string} [message]
+ * @property {string} [payload]
  */
 
 /**
- * Read file and print it's content in console.
+ * Calculate hash for file and print it into console
  * @param {string} pathToFile - Path to file.
- * @return {Promise<Report>} report
+ * @return {Report} report
  */
-
-export const cat = async (pathToFile) => {};
+export const hash = async (pathToFile) => {};

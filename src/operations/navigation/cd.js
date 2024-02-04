@@ -1,9 +1,13 @@
 /**
- * Go to dedicated folder from current directory
- * @param {string} path - Path to directory can be relative or absolute.
- * @return {Promise<string>} report
+ * @typedef {Object} Report
+ * @property {"error"|"success"} status
+ * @property {string} [message]
  */
 
-export const cd = async (path) => {
+/**
+ * Go to dedicated folder from current directory
+ * @param {string} path - Path to directory can be relative or absolute.
+ * @return {Promise<Report>} report
+ */
 
-}
+export const cd = async (path) => {};

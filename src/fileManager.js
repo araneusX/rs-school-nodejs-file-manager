@@ -1,58 +1,49 @@
 import readline from 'readline';
 
-import {showLoader, printTable, printMessage} from './utils/index.js';
-
-const PROMPT = '> ';
+import { CLI } from './utils/index.js';
 
 const fileManager = async () => {
-  let userName = '';
-  let isProcess = false;
+  const userName = '';
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: PROMPT,
   });
 
-  const writeStream = process.stdout;
+  const cli = new CLI(rl);
 
-  printMessage.welcome(userName);
-  rl.prompt();
+  cli.printWelcome();
 
-rl.on('line', (line) => {
-  if (isProcess) {
-    writeStream.moveCursor(0 ,-1);
-    writeStream.clearScreenDown();
-    return;
-  }
+  rl.on('line', (line) => {
+    if (cli.isProcess) {
+      return;
+    }
 
-  switch (line.trim()) {
-    case 'hello':
-      console.log('world!');
-      break;
-    case 'loader':
-      isProcess = true;
-      const stopLoader = showLoader(rl);
-      setTimeout(() => {
-        stopLoader();
-        printMessage.success('Success')
-        rl.prompt();
-        printMessage.currentDirectory('/')
-        rl.prompt();  
-        isProcess = false;
-      }, 2000);
-      break;
-    default:
-      printMessage.invalidInput();
-      break;
-  }
-  rl.prompt();
-}).on('SIGINT', () => {
-  rl.setPrompt(PROMPT)
-  rl.prompt();
-  printMessage.goodbye(userName)
-  process.exit(0);
-}); 
-}
+    const [command, ...params] = line
+      .trim()
+      .split(' ')
+      .filter((value) => !!value);
+
+    switch (command) {
+      case 'hello':
+        console.log('world!');
+        break;
+      case 'loader': {
+        cli.pauseInput();
+        setTimeout(() => {
+          cli.resumeInputWithSuccess('Eeeeeeeh!');
+        }, 5000);
+        break;
+      }
+      default:
+        cli.resumeInputWithError('Invalid input');
+        break;
+    }
+    rl.prompt();
+  }).on('SIGINT', () => {
+    cli.printGoodbye();
+    process.exit(0);
+  });
+};
 
 export default fileManager;

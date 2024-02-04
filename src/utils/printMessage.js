@@ -4,41 +4,39 @@ const colors = {
   currentDirectory: '\x1b[93m%s\x1b[0m',
   welcome: '\x1b[36m%s\x1b[0m',
   goodbye: '\x1b[36m%s\x1b[0m',
-  invalidInput: '\x1b[31m%s\x1b[0m',
-  operationFailed: '\x1b[31m%s\x1b[0m',
-}
+};
 
 const messages = {
-  welcome: (value = '') => `Welcome to the File Manager${value && `, ${value}`}!`,
-  goodbye: (value = '') => `Thank you for using File Manager${value && `, ${value}`}, goodbye!`,
+  welcome: (value = '') =>
+    `Welcome to the File Manager${value && `, ${value}`}!`,
+  goodbye: (value = '') =>
+    `Thank you for using File Manager${value && `, ${value}`}, goodbye!`,
   success: (value) => value,
   error: (value) => value,
   currentDirectory: (value = '') => `You are currently in ${value}`,
-  invalidInput: () => 'Invalid input',
-  operationFailed: () => 'Operation failed',
 };
 
 /**
-* @typedef {Object} PrintMessage
-* @property {(value?: string) => void} welcome
-* @property {(value?: string) => void} goodbye
-* @property {(value?: string) => void} currentDirectory
-* @property {(value: string) => void} success
-* @property {(value: string) => void} error
-* @property {() => void} invalidInput
-* @property {() => void} operationFailed
-*/
+ * @typedef {Object} PrintMessage
+ * @property {(value?: string) => void} welcome
+ * @property {(value?: string) => void} goodbye
+ * @property {(value?: string) => void} currentDirectory
+ * @property {(value: string) => void} success
+ * @property {(value: string) => void} error
+ */
 
 /**
-* @type {PrintMessage}
-*/
+ * @type {PrintMessage}
+ */
 export const printMessage = Object.fromEntries(
-  Object.entries(messages)
-    .map(([name, callback]) => [name, (...args) => {
+  Object.entries(messages).map(([name, callback]) => [
+    name,
+    (...args) => {
       if (colors[name]) {
-        console.log(colors[name], callback(...args))
+        console.log(colors[name], callback(...args));
       } else {
-        console.log(callback(...args))
+        console.log(callback(...args));
       }
-    }])
-)
+    },
+  ]),
+);

@@ -5,10 +5,10 @@
  */
 
 /**
- * Move file (same as copy but initial file is deleted)
+ * Decompress file
  * @param {string} pathToFile - Path to file.
- * @param {string} pathToNewDirectory - Path to new directory.
+ * @param {string} pathToDestination - Path to decompressed file.
  * @return {Promise<Report>} report
  */
 
-export const mv = async (pathToFile, pathToNewDirectory) => {};
+export const decompress = async (pathToFile, pathToDestination) => {};

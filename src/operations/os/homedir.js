@@ -2,12 +2,11 @@
  * @typedef {Object} Report
  * @property {"error"|"success"} status
  * @property {string} [message]
+ * @property {string} [payload]
  */
 
 /**
- * Delete file
- * @param {string} newFileName - File name.
+ * Get home directory and print it to console
  * @return {Promise<Report>} report
  */
-
-export const rm = async (newFileName) => {};
+export const homedir = async () => {};
