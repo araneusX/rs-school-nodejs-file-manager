@@ -13,7 +13,8 @@ const messages = {
   goodbye: (value = '') =>
     `Thank you for using File Manager${value && `, ${value}`}, goodbye!`,
   success: (value) => value,
-  error: (value) => value,
+  error: (value) =>
+    value === 'Invalid input' ? value : `Operation failed: ${value}`,
   data: (value) => value,
   currentDirectory: (value = '') => `You are currently in ${value}`,
 };

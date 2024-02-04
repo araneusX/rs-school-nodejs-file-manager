@@ -1,5 +1,4 @@
 import readline from 'readline';
-import path from 'path';
 import os from 'os';
 
 import { CLI, resolveParams, doOperation } from './utils/index.js';
@@ -18,7 +17,9 @@ const supportedOsOperations = Object.keys(osOperations).map(
 );
 
 const fileManager = () => {
-  const userName = '';
+  const { '--username': userName } = Object.fromEntries([
+    process.argv[2].split('='),
+  ]);
 
   process.chdir(os.homedir());
 
@@ -29,7 +30,7 @@ const fileManager = () => {
 
   const cli = new CLI(rl);
 
-  cli.printWelcome();
+  cli.printWelcome(userName);
 
   rl.on('line', (line) => {
     (async () => {
@@ -67,7 +68,7 @@ const fileManager = () => {
       );
     });
   }).on('SIGINT', () => {
-    cli.printGoodbye();
+    cli.printGoodbye(userName);
     process.exit(0);
   });
 };

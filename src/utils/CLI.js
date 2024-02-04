@@ -124,6 +124,7 @@ export class CLI {
     }
 
     if (message) {
+      this.rl.prompt();
       printMessage.success(message);
     }
 
@@ -138,8 +139,8 @@ export class CLI {
       clearInterval(this.interval);
       this.interval = null;
       this.rl.setPrompt(BASE_PROMPT);
-      this.rl.prompt();
     }
+    this.rl.prompt();
 
     const errorMessage = message ?? 'Operation failed';
     printMessage.error(errorMessage);
