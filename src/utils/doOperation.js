@@ -3,7 +3,7 @@ import { resolveParams } from './resolveParams.js';
 /**
  * @typedef {Object} Result
  * @property {string} [message]
- * @property {Object.<string, string>[] | string} [payload]
+ * @property {Object.<string, string>[] | string | ReadStream} [payload]
  */
 
 /**

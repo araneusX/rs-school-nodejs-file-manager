@@ -18,7 +18,7 @@ const supportedOsOperations = Object.keys(osOperations).map(
 
 const fileManager = () => {
   const { '--username': userName } = Object.fromEntries([
-    process.argv[2].split('='),
+    (process.argv[2] ?? '').split('='),
   ]);
 
   process.chdir(os.homedir());
@@ -37,6 +37,8 @@ const fileManager = () => {
       if (cli.isProcess) {
         return;
       }
+
+      cli.pauseInput();
 
       const [operation, ...operationParams] = line
         .trim()
@@ -58,7 +60,7 @@ const fileManager = () => {
       }
 
       if (result.payload) {
-        cli.printData(result.payload);
+        await cli.printData(result.payload);
       }
 
       cli.resumeInputWithSuccess(result.message);

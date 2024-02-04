@@ -16,7 +16,7 @@ const messages = {
   error: (value) =>
     value === 'Invalid input' ? value : `Operation failed: ${value}`,
   data: (value) => value,
-  currentDirectory: (value = '') => `You are currently in ${value}`,
+  currentDirectory: (value = '') => `You are currently in ${value}>`,
 };
 
 /**

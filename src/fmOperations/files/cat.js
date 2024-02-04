@@ -1,6 +1,10 @@
+import { createReadStream } from 'fs';
+import { access, constants } from 'fs/promises';
+
 /**
  * @typedef {Object} Report
  * @property {string} [message]
+ * @property {ReadStream} payload
  */
 
 /**
@@ -8,5 +12,10 @@
  * @param {string} pathToFile - Path to file.
  * @return {Promise<Report>} report
  */
+export const cat = async (pathToFile) => {
+  await access(pathToFile, constants.F_OK);
 
-export const cat = async (pathToFile) => {};
+  return {
+    payload: createReadStream(pathToFile),
+  };
+};

@@ -1,9 +1,10 @@
+import { ReadStream } from 'fs';
 import { printMessage } from './printMessage.js';
 
 const symbols = ['⣾', '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽'];
 const writeStream = process.stdout;
 const BASE_PROMPT = '> ';
-const CTA_PROMPT = 'Enter your command:> ';
+const CTA_PROMPT = 'Enter your command> ';
 
 export class CLI {
   /**
@@ -64,9 +65,6 @@ export class CLI {
     let currentSymbolIdx = 0;
 
     clearInterval(this.interval);
-    writeStream.moveCursor(0, -1);
-    writeStream.clearScreenDown();
-
     this.interval = setInterval(() => {
       this.rl.setPrompt(symbols[currentSymbolIdx] + ' ');
 
@@ -84,32 +82,48 @@ export class CLI {
   }
 
   /**
-   * @param {{[key: string]: string}[] | string} data - Readline Interface
+   * @param {{[key: string]: string}[] | string | ReadStream } data - Readline Interface
    * @return {void}
    */
   printData(data) {
-    const isPause = this.interval !== null;
-    clearInterval(this.interval);
-    this.interval = null;
+    return new Promise((resolve, reject) => {
+      const isPause = this.interval !== null;
+      clearInterval(this.interval);
+      this.interval = null;
 
-    const currentPrompt = this.rl.getPrompt();
+      console.log('');
+      if (data instanceof ReadStream) {
+        data.on('data', (chunk) => {
+          printMessage.data(chunk);
+        });
+        data.on('end', () => {
+          console.log('');
+          resolve();
+        });
+        data.on('error', (error) => {
+          console.log('');
+          reject(error);
+        });
 
-    this.rl.setPrompt('');
-    this.rl.prompt();
-    console.log('');
-    if (Array.isArray(data)) {
-      console.table(data);
-    } else {
-      printMessage.data(data);
-    }
-    console.log('');
+        return;
+      }
 
-    if (isPause) {
-      this.pauseInput();
-    } else {
-      this.rl.setPrompt(currentPrompt);
-      this.rl.prompt();
-    }
+      if (Array.isArray(data)) {
+        console.table(data);
+      } else {
+        printMessage.data(data);
+      }
+      console.log('');
+
+      if (isPause) {
+        this.pauseInput();
+      } else {
+        this.rl.setPrompt(currentPrompt);
+        this.rl.prompt();
+      }
+
+      resolve();
+    });
   }
 
   /**
