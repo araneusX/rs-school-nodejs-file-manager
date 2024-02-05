@@ -4,7 +4,7 @@
 
 We are excited to share our software with you and hope you enjoy using it. As this is the first version, there may be some features that are not fully optimized yet.
 
-Please follow these guidelines when using the application. They are consistent with the technical specifications and provide some additional clarity.
+Please follow these guidelines when using the application. They are consistent with the technical specifications but provide some additional clarity.
 
 1. Spaces in file names and paths are not allowed.
 
