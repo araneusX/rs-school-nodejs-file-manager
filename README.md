@@ -2,6 +2,10 @@
 
 # File Manager
 
+Use the next command to start:
+
+ ```npm run start -- --username=your_username```
+
 We are excited to share our software with you and hope you enjoy using it. As this is the first version, there may be some features that are not fully optimized yet.
 
 Please follow these guidelines when using the application. They are consistent with the technical specifications but provide some additional clarity.
