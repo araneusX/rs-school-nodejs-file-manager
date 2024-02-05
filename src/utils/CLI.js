@@ -29,8 +29,7 @@ export class CLI {
     this.rl.on('line', (line) => {
       const [operation] = line
       .trim()
-      .split(' ')
-      .filter((value) => value !== '');
+      .split(' ');
 
       if (operation === '.exit') {
         writeStream.moveCursor(0, -1);

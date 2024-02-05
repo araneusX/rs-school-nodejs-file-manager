@@ -39,9 +39,11 @@ const fileManager = () => {
       }
 
       const [operation, ...operationParams] = line
-        .trim()
-        .split(' ')
-        .filter((value) => value !== '');
+        .split('"')
+        .map((item, idx) => !idx ? item.split(' ') : item.trim())
+        .flat()
+        .filter((item) => !!item)
+  
         
       if (operation === '.exit') {
         cli.printGoodbye(userName);
