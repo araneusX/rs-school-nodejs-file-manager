@@ -26,7 +26,17 @@ export class CLI {
 
     this.rl.setPrompt(BASE_PROMPT);
 
-    this.rl.on('line', () => {
+    this.rl.on('line', (line) => {
+      const [operation] = line
+      .trim()
+      .split(' ')
+      .filter((value) => value !== '');
+
+      if (operation === '.exit') {
+        writeStream.moveCursor(0, -1);
+        return;
+      }
+
       if (this.interval !== null) {
         writeStream.moveCursor(0, -2);
         writeStream.clearScreenDown();
@@ -58,7 +68,9 @@ export class CLI {
    * @param {string} [username]
    */
   printGoodbye(username) {
-    printMessage.welcome(username);
+    clearInterval(this.interval);
+    console.log('');
+    printMessage.goodbye(username);
   }
 
   pauseInput() {

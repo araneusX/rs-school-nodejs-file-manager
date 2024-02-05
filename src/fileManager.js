@@ -38,12 +38,17 @@ const fileManager = () => {
         return;
       }
 
-      cli.pauseInput();
-
       const [operation, ...operationParams] = line
         .trim()
         .split(' ')
         .filter((value) => value !== '');
+        
+      if (operation === '.exit') {
+        cli.printGoodbye(userName);
+        process.exit(0);
+      }
+        
+      cli.pauseInput();
 
       /**
        * @type {Result}
