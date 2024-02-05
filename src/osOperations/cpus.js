@@ -17,7 +17,7 @@ export const cpus = async () => {
   ${cpusInfo
     .map(
       ({ model, speed }, idx) => `
-    ${`CPU_${idx}`.padStart(6, ' ')} >>> Model: ${model} | >>> Speed: ${speed} GHz`,
+    ${`CPU_${idx}`.padStart(6, ' ')} >>> Model: ${model} | >>> Speed: ${speed / 1000} GHz`,
     )
     .join('')}`;
 
