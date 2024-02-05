@@ -12,6 +12,6 @@ import os from 'os';
  */
 export const architecture = async () => {
   return {
-    payload: `    CPU architecture for which the Node.js binary was compiled >>> ${os.arch()}`,
+    payload: `    CPU architecture >>> ${os.arch()}`,
   };
 };
