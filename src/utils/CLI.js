@@ -36,14 +36,6 @@ export class CLI {
         writeStream.moveCursor(0, -1);
         return;
       }
-
-      if (this.interval !== null) {
-        writeStream.moveCursor(0, -2);
-        writeStream.clearScreenDown();
-      } else {
-        writeStream.moveCursor(0, -1);
-        writeStream.clearScreenDown();
-      }
     });
   }
 
@@ -53,7 +45,6 @@ export class CLI {
     printMessage.currentDirectory(process.cwd());
     this.rl.setPrompt(CTA_PROMPT);
     this.rl.prompt();
-    this.rl.setPrompt(BASE_PROMPT);
   }
 
   /**
