@@ -1,6 +1,6 @@
 ### rs-school-nodejs-file-manager
 
-#File Manager
+# File Manager
 
 We are excited to share our software with you and hope you enjoy using it. As this is the first version, there may be some features that are not fully optimized yet.
 
