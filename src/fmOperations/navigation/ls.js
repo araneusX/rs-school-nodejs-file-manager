@@ -23,14 +23,14 @@ export const ls = async () => {
     .map((dirent) =>
       ({
         Name: dirent.name,
-        Type: () => {
+        Type: (() => {
           try {
             return dirent.isDirectory() ? 'directory' : 'file';
           } catch {
             return 'ERROR';
           }
-        },
-      })(),
+        })(),
+      }),
     )
     .sort((a, b) => {
       let aWeight = a.Type === 'file' ? 10 : 0;

@@ -16,20 +16,26 @@ import { access, constants } from 'fs/promises';
  */
 export const cp = async (pathToFile, pathToNewDirectory) => {
   const fileName = parse(pathToFile).base;
-  const pathToDestination = join(pathToNewDirectory, fileName);
 
   await Promise.all([
     access(pathToFile, constants.F_OK),
     access(pathToNewDirectory, constants.F_OK),
-    access(pathToDestination, constants.F_OK).then(
-      () => {
-        throw new Error(
-          `The ${fileName} file already exists in the path ${pathToNewDirectory}`,
-        );
-      },
-      () => null,
-    ),
   ]);
+
+  let pathToDestination;
+  let candidateFileName = fileName;
+
+  while (!pathToDestination) {
+    const destination = join(pathToNewDirectory, candidateFileName);
+    await access(destination, constants.F_OK).then(
+      () => {
+        candidateFileName = `copy_${candidateFileName}`
+      },
+      () => {
+        pathToDestination = destination;
+      },
+    )
+  }
 
   await pipeline(
     createReadStream(pathToFile),
@@ -37,6 +43,6 @@ export const cp = async (pathToFile, pathToNewDirectory) => {
   );
 
   return {
-    message: 'Successfully done',
+    message: `Successfully done. The copy file is in "${pathToDestination}"`,
   };
 };
